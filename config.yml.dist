@@ -1,0 +1,35 @@
+---
+#
+# Project Name
+#
+project : '<project>'
+
+##################################################
+### Vagrant Environment
+##################################################
+#
+# Linux Distribution
+#
+# Possible values => 'debian' or 'centos'
+#
+linux_distro : 'debian'
+
+#
+# VM IP Address
+#
+ip_addr : '10.12.12.2'
+
+#
+# VM CPUs Number
+#
+vm_cpus : '2'
+
+#
+# VM Memory in MB
+#
+vm_memory : '2048'
+
+#
+# VM Hostname Suffix
+#
+hostname_suffix : 'local'
