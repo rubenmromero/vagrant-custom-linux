@@ -4,7 +4,6 @@ Customizable Vagrantfile to start and provision Debian & CentOS VMs based on Vir
 
 ## Prerequisites
 
-* Git 1.7+
 * Vagrant 1.7.4+
 * VirtualBox 5.0.2+
 
