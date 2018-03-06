@@ -50,13 +50,13 @@ Vagrant.configure('2') do |config|
         node_conf.vm.synced_folder "../", "/var/www/#{project}", owner: "www-data", group: "www-data"
 
         # Package list initial update for Debian distros
-        if linux_distro == 'debian' 
+        if linux_distro == 'debian'
             apt_update = 'apt-get update'
             node_conf.vm.provision "shell", inline: apt_update
         end
 
         # Update www-data user shell to /bin/bash for Debian distros
-        if linux_distro == 'debian' 
+        if linux_distro == 'debian'
             update_user_shell = "usermod -s /bin/bash www-data"
             node_conf.vm.provision "shell", inline: update_user_shell
         end
