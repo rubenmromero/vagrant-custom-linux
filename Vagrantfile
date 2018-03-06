@@ -5,17 +5,12 @@ require 'yaml'
 env_config = YAML::load_file("./config.yml")
 
 project = env_config['project']
-linux_distro = env_config['linux_distro']
+vagrant_box = env_config['vagrant_box']
+linux_distro, *rest = vagrant_box.split('/')
 ip_addr = env_config['ip_addr']
 vm_cpus = env_config['vm_cpus']
 vm_memory = env_config['vm_memory']
 hostname_suffix = env_config['hostname_suffix']
-
-# Linux Boxes
-box_debian = 'gigigo-debian-jessie-x64.box'
-box_debian_url = 'http://box.gigigo.com/gigigo-debian-jessie-x64.box'
-box_centos = 'gigigo-centos7-x64.box'
-box_centos_url = 'http://box.gigigo.com/gigigo-centos7-x64.box'
 
 Vagrant.configure('2') do |config|
     # Enable/Disable auto update of virtualbox guest additions
@@ -25,13 +20,7 @@ Vagrant.configure('2') do |config|
 
     # Project
     config.vm.define :"#{project}" do |node_conf|
-        if linux_distro == 'debian'
-            node_conf.vm.box = box_debian
-            node_conf.vm.box_url = box_debian_url
-        else
-            node_conf.vm.box = box_centos
-            node_conf.vm.box_url = box_centos_url
-        end
+        node_conf.vm.box = vagrant_box
         node_conf.vm.network :private_network, ip: ip_addr
         node_conf.vm.hostname = "#{project}.#{hostname_suffix}"
 
@@ -47,18 +36,12 @@ Vagrant.configure('2') do |config|
         end
 
         # Shared folders
-        node_conf.vm.synced_folder "../", "/var/www/#{project}", owner: "www-data", group: "www-data"
+        node_conf.vm.synced_folder "../", "/var/www/#{project}", owner: "vagrant", group: "vagrant"
 
         # Package list initial update for Debian distros
         if linux_distro == 'debian'
             apt_update = 'apt-get update'
             node_conf.vm.provision "shell", inline: apt_update
-        end
-
-        # Update www-data user shell to /bin/bash for Debian distros
-        if linux_distro == 'debian'
-            update_user_shell = "usermod -s /bin/bash www-data"
-            node_conf.vm.provision "shell", inline: update_user_shell
         end
     end
 end

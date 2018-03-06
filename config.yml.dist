@@ -8,11 +8,11 @@
 project : '<project>'
 
 #
-# Linux Distribution
+# Vagrant Box from Vagrant Cloud
 #
-# Possible values => 'debian' or 'centos'
+# Possible values => 'debian/jessie64', 'centos/7', ...
 #
-linux_distro : 'debian'
+vagrant_box : 'debian/jessie64'
 
 #
 # VM IP Address
