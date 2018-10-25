@@ -29,6 +29,10 @@ If you need some help with the Vagrant utility, you can get it by executing the 
 
     $ vagrant --help
 
+## Troubleshooting
+
+* [Fix network problem in CentOS](https://unix.stackexchange.com/questions/315591/centos-7-disable-predictable-network-interface-names-with-packer-vagrant)
+
 ## Related Links
 
 * [Vagrant Documentation](https://www.vagrantup.com/docs/index.html)
