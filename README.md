@@ -4,14 +4,18 @@ Customizable Vagrantfile to start and provision Debian & CentOS VMs based on Vir
 
 ## Prerequisites
 
-* Vagrant 1.7.4+
-* VirtualBox 5.0.2+
+* Vagrant 1.7.4+ => [Download Vagrant](https://www.vagrantup.com/downloads.html)
+* VirtualBox 5.0.2+ => [Download VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 ## Configuration
 
 1. Download the Vagrant-Custom-Linux code into the root folder of your project:
 
        $ git clone https://github.com/rubenmromero/vagrant-custom-linux.git
+
+2. Install the `vagrant-vbguest` Vagrant plugin:
+
+       $ vagrant plugin install vagrant-vbguest
 
 2. Create a copy of [config.yml.dist](config.yml.dist) template to `config.yml`, edit the new file and set the Vagrant environment configuration replacing the existing `<tags>` with the appropiate values:
 
@@ -35,5 +39,7 @@ If you need some help with the Vagrant utility, you can get it by executing the 
 
 ## Related Links
 
+* [dotless-de/vagrant-vbguest - GitHub](https://github.com/dotless-de/vagrant-vbguest)
+* [Discover Vagrant Boxes](https://app.vagrantup.com/boxes/search)
 * [Vagrant Documentation](https://www.vagrantup.com/docs/index.html)
 * [VirtualBox Documentation](https://www.virtualbox.org/wiki/Documentation)

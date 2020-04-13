@@ -5,31 +5,31 @@
 #
 # Project Name
 #
-project : '<project>'
+project: <project>
 
 #
 # Linux Distribution
 #
-# Possible values => 'debian' or 'centos'
+# Possible values => debian or centos
 #
-linux_distro : 'debian'
+linux_distro: debian
 
 #
 # VM IP Address
 #
-ip_addr : '10.12.12.2'
+ip_addr: 10.12.12.2
 
 #
 # VM CPUs Number
 #
-vm_cpus : '2'
+vm_cpus: 2
 
 #
 # VM Memory in MB
 #
-vm_memory : '2048'
+vm_memory: 2048
 
 #
 # VM Hostname Suffix
 #
-hostname_suffix : 'local'
+hostname_suffix: local

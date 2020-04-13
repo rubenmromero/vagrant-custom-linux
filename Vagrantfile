@@ -2,7 +2,8 @@
 
 # Environment Import
 require 'yaml'
-env_config = YAML::load_file("./config.yml")
+env_config = YAML::load_file('./config.yml')
+boxes_config = YAML::load_file('./boxes.yml')
 
 project = env_config['project']
 linux_distro = env_config['linux_distro']
@@ -11,26 +12,20 @@ vm_cpus = env_config['vm_cpus']
 vm_memory = env_config['vm_memory']
 hostname_suffix = env_config['hostname_suffix']
 
-# Linux Boxes
-box_debian = 'gigigo-debian-jessie-x64.box'
-box_debian_url = 'http://box.gigigo.com/gigigo-debian-jessie-x64.box'
-box_centos = 'gigigo-centos7-x64.box'
-box_centos_url = 'http://box.gigigo.com/gigigo-centos7-x64.box'
-
 Vagrant.configure('2') do |config|
     # Enable/Disable auto update of virtualbox guest additions
-    if Vagrant.has_plugin?("vagrant-vbguest")
-        config.vbguest.auto_update = false
+    if Vagrant.has_plugin?('vagrant-vbguest')
+        config.vbguest.auto_update = true
     end
 
     # Project
     config.vm.define :"#{project}" do |node_conf|
         if linux_distro == 'debian'
-            node_conf.vm.box = box_debian
-            node_conf.vm.box_url = box_debian_url
+            node_conf.vm.box = boxes_config['debian_box']
+            node_conf.vm.box_url = boxes_config['debian_box_url'] if boxes_config['debian_box_url']
         else
-            node_conf.vm.box = box_centos
-            node_conf.vm.box_url = box_centos_url
+            node_conf.vm.box = boxes_config['centos_box']
+            node_conf.vm.box_url = boxes_config['centos_box_url'] if boxes_config['centos_box_url']
         end
         node_conf.vm.network :private_network, ip: ip_addr
         node_conf.vm.hostname = "#{project}.#{hostname_suffix}"
@@ -44,21 +39,16 @@ Vagrant.configure('2') do |config|
             v.customize ['modifyvm', :id, '--natdnshostresolver1', 'off']
             v.customize ['modifyvm', :id, '--nictype1', 'virtio']
             v.customize ['modifyvm', :id, '--nictype2', 'virtio']
+            v.customize ["modifyvm", :id, '--graphicscontroller', 'vmsvga']
         end
 
         # Shared folders
-        node_conf.vm.synced_folder "../", "/var/www/#{project}", owner: "www-data", group: "www-data"
+        node_conf.vm.synced_folder "../", "/opt/#{project}", owner: 'vagrant', group: 'vagrant'
 
         # Package list initial update for Debian distros
         if linux_distro == 'debian'
-            apt_update = 'apt-get update'
-            node_conf.vm.provision "shell", inline: apt_update
-        end
-
-        # Update www-data user shell to /bin/bash for Debian distros
-        if linux_distro == 'debian'
-            update_user_shell = "usermod -s /bin/bash www-data"
-            node_conf.vm.provision "shell", inline: update_user_shell
+            apt_update = "apt-get update"
+            node_conf.vm.provision 'shell', inline: apt_update
         end
     end
 end
