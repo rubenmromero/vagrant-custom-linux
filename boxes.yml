@@ -5,7 +5,7 @@
 #
 # Debian Box
 #
-debian_box: debian/contrib-jessie64
+debian_box: debian/buster64
 #debian_box_url: <debian_box_url>
 
 #
