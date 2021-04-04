@@ -9,23 +9,26 @@ Customizable Vagrantfile to start and provision Debian & CentOS VMs based on Vir
 
 ## Configuration
 
-1. Download the Vagrant-Custom-Linux code into the root folder of your project:
+1. Clone this repo into the root folder of your project and add the resulting `vagrant` folder to your project's `.gitignore` file:
 
-       $ git clone https://github.com/rubenmromero/vagrant-custom-linux.git
+       $ git clone https://github.com/rubenmromero/vagrant-custom-linux.git vagrant
+       $ echo '/vagrant/' >>.gitignore
+       $ git commit -m "Update '.gitignore' file" .gitignore
 
-2. Install the `vagrant-vbguest` Vagrant plugin:
+2. Change to the `vagrant` folder and install the `vagrant-vbguest` Vagrant plugin:
 
+       $ cd vagrant
        $ vagrant plugin install vagrant-vbguest
 
-2. Create a copy of [config.yml.dist](config.yml.dist) template to `config.yml`, edit the new file and set the Vagrant environment configuration replacing the existing `<tags>` with the appropiate values:
+2. Create a copy of [`config.yml.dist`](config.yml.dist) template named `config.yml`, edit the new file and set the Vagrant environment configuration replacing the existing `<tags>` by the appropriate values:
 
-       # From the folder that contains the Vagrantfile
+       # From the vagrant folder
        $ cp -p config.yml.dist config.yml
        $ vi config.yml
 
 ## Execution Method
 
-Once configured the Vagrant environment configuration into `config.yml` file, simply run the following command:
+Once set up the Vagrant environment configuration in the `config.yml` file, simply run the following command from the `vagrant` folder:
 
     $ vagrant up
 

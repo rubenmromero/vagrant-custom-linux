@@ -5,11 +5,11 @@
 #
 # Debian Box
 #
-debian_box: debian/buster64
+debian_box: generic/debian10
 #debian_box_url: <debian_box_url>
 
 #
 # CentOS Box
 #
-centos_box: centos/8
-centos_box_url: http://cloud.centos.org/centos/8/x86_64/images/CentOS-8-Vagrant-8.1.1911-20200113.3.x86_64.vagrant-virtualbox.box
+centos_box: generic/centos8
+#centos_box_url: <centos_box_url>
