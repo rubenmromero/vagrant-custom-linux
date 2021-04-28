@@ -3,13 +3,19 @@
 ### Distro Boxes
 ##################################################
 #
+# CentOS Box
+#
+centos_box: generic/centos8
+#centos_box_url: <centos_box_url>
+
+#
 # Debian Box
 #
 debian_box: generic/debian10
 #debian_box_url: <debian_box_url>
 
 #
-# CentOS Box
+# Ubuntu Box
 #
-centos_box: generic/centos8
-#centos_box_url: <centos_box_url>
+ubuntu_box: generic/ubuntu2004
+#ubuntu_box_url: <ubuntu_box_url>

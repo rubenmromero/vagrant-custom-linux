@@ -10,9 +10,9 @@ project: <project>
 #
 # Linux Distribution
 #
-# Possible values => debian or centos
+# Possible values => centos, debian or ubuntu
 #
-linux_distro: debian
+linux_distro: centos
 
 #
 # VM IP Address

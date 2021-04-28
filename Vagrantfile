@@ -20,12 +20,15 @@ Vagrant.configure('2') do |config|
 
     # Project
     config.vm.define :"#{project}" do |node_conf|
-        if linux_distro == 'debian'
+        if linux_distro == 'centos'
+            node_conf.vm.box = boxes_config['centos_box']
+            node_conf.vm.box_url = boxes_config['centos_box_url'] if boxes_config['centos_box_url']
+        elsif linux_distro == 'debian'
             node_conf.vm.box = boxes_config['debian_box']
             node_conf.vm.box_url = boxes_config['debian_box_url'] if boxes_config['debian_box_url']
         else
-            node_conf.vm.box = boxes_config['centos_box']
-            node_conf.vm.box_url = boxes_config['centos_box_url'] if boxes_config['centos_box_url']
+            node_conf.vm.box = boxes_config['ubuntu_box']
+            node_conf.vm.box_url = boxes_config['ubuntu_box_url'] if boxes_config['ubuntu_box_url']
         end
         node_conf.vm.network :private_network, ip: ip_addr
         node_conf.vm.hostname = "#{project}.#{hostname_suffix}"
@@ -46,7 +49,7 @@ Vagrant.configure('2') do |config|
         node_conf.vm.synced_folder "../", "/opt/#{project}", owner: 'vagrant', group: 'vagrant'
 
         # Package list initial update for Debian distros
-        if linux_distro == 'debian'
+        if linux_distro == 'debian' || linux_distro == 'ubuntu'
             apt_update = "apt-get update"
             node_conf.vm.provision 'shell', inline: apt_update
         end

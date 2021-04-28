@@ -1,6 +1,6 @@
 # Vagrant-Custom-Linux
 
-Customizable Vagrantfile to start and provision Debian & CentOS VMs based on VirtualBox provider.
+Customizable Vagrantfile to provision and run CentOS, Debian & Ubuntu VMs based on VirtualBox provider.
 
 ## Prerequisites
 
