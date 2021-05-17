@@ -34,8 +34,8 @@ Vagrant.configure('2') do |config|
         node_conf.vm.hostname = "#{project}.#{hostname_suffix}"
 
         node_conf.vm.provider 'virtualbox' do |v|
-            v.customize ['modifyvm', :id, '--groups', "/#{project}-#{linux_distro}"]
-            v.customize ['modifyvm', :id, '--name', "#{project}-#{linux_distro}"]
+            v.customize ['modifyvm', :id, '--groups', "/#{project}"]
+            v.customize ['modifyvm', :id, '--name', "#{project}"]
             v.customize ['modifyvm', :id, '--cpus', vm_cpus]
             v.customize ['modifyvm', :id, '--memory', vm_memory]
             v.customize ['modifyvm', :id, '--ioapic', 'on']
@@ -48,7 +48,7 @@ Vagrant.configure('2') do |config|
         # Shared folders
         node_conf.vm.synced_folder "../", "/opt/#{project}", owner: 'vagrant', group: 'vagrant'
 
-        # Package list initial update for Debian distros
+        # Package list initial update for Debian & Ubuntu distros
         if linux_distro == 'debian' || linux_distro == 'ubuntu'
             apt_update = "apt-get update"
             node_conf.vm.provision 'shell', inline: apt_update
